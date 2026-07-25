@@ -1,56 +1,43 @@
 # Computational Methods for Social Science
 
-> A reproducibility-first collection of computational methods accumulated
-> across projects for use in social science research.
+> Computational methods learned through projects and kept for later use in
+> social science research.
 
-This repository is a growing methods collection rather than a portfolio of
-finished projects. Each project is a worked example through which a method is
-tested, understood, and documented for possible reuse in future social science
-research.
+Each project is a worked example of what a method does, where it may help, and
+what its limits are.
 
-## Repository positioning
+## Purpose
 
-### What this repository is
+This repository is:
 
-- A collection of computational methods learned and refined through individual
-  projects.
-- A set of worked examples covering sensor time series, text classification,
-  irony detection, and neural models.
-- A reference for choosing, adapting, and evaluating methods in later social
-  science research.
+- a collection of reusable methods, not a portfolio of finished work;
+- a reference for choosing and adapting methods in later research;
+- a record of evaluation rules and known limits.
 
-### What this repository is not
-
-- It is not a portfolio intended mainly to showcase completed work.
-- It is not a production library or a unified research framework.
-- It is not a benchmark claiming state-of-the-art results.
-- It is not the replication package for one paper.
-- The reinforcement-learning notebook is external course material, not an
-  original research contribution.
+It is not a production library, a state-of-the-art benchmark, or a replication
+package for one paper.
 
 ## Method index
 
-| Worked example | Possible social science use | Reusable methods | Main artifact | Scope |
-| --- | --- | --- | --- | --- |
-| Human activity recognition | Turning repeated sensor measurements into behavioral categories | Time-series feature extraction, bootstrap intervals, logistic regression, L1 selection, Naive Bayes | [`AReM-Analysis/MainAnalysis.ipynb`](AReM-Analysis/MainAnalysis.ipynb) | Data bundled; evaluation path validated; rerun for results |
-| Movie-review sentiment | Measuring evaluative stance in text | Tokenization, embeddings, MLP, CNN, LSTM | [`final_project/Final_project.ipynb`](final_project/Final_project.ipynb) | Data bundled; split validated; training is compute-intensive |
-| Sarcasm-aware sentiment | Testing how contextual language complicates text measurement | TF-IDF logistic baseline, BERT, irony-prefix augmentation | [`EnhancedSentimentwithSarcasm/`](EnhancedSentimentwithSarcasm/) | Experimental; downloads IMDb and pretrained models |
-| Reinforcement-learning exercise | Learning sequential decision methods that may support later research designs | PPO, Unity ML-Agents, Hugging Face Hub | [`RL/notebooks/bonus-unit1/`](RL/notebooks/bonus-unit1/) | External tutorial; Colab-oriented; adjacent learning material |
+| Project | Method | Possible social science use | Main artifact |
+| --- | --- | --- | --- |
+| Human activity recognition | Time-series features, bootstrap intervals, logistic regression, L1 selection, Naive Bayes | Turn sensor traces into behavior categories | [`AReM-Analysis/MainAnalysis.ipynb`](AReM-Analysis/MainAnalysis.ipynb) |
+| Movie-review sentiment | Tokenization, embeddings, MLP, CNN, LSTM | Turn text into attitude labels and compare model assumptions | [`final_project/Final_project.ipynb`](final_project/Final_project.ipynb) |
+| Sarcasm-aware sentiment | TF-IDF baseline, BERT, predicted-irony signal | Test how context affects text measurement | [`EnhancedSentimentwithSarcasm/`](EnhancedSentimentwithSarcasm/) |
+| Reinforcement learning | State, action, reward, PPO | Study sequential decisions and behavior simulation | [`RL/notebooks/bonus-unit1/`](RL/notebooks/bonus-unit1/) |
+
+In short: **behavior traces → categories; text → attitudes; context →
+measurement correction; rewards → strategies.**
+
+The reinforcement-learning notebook is external course material and has not
+yet been adapted into a social science research example.
 
 ## Research stance
 
-The strongest use of machine learning in computational social science is often
-measurement: extracting a variable, label, or pattern that supports a larger
-substantive argument. Accordingly:
-
-- held-out performance is evidence about generalization, not causal
-  explanation;
-- larger or more complex models are not assumed to produce better social
-  understanding;
-- irony and context-heavy language are treated as measurement challenges, not
-  solved constructs;
-- saved notebook outputs are cleared so results cannot drift away from the
-  current source.
+- Prediction is used as measurement, not as an explanation by itself.
+- Test performance is not causal evidence.
+- A more complex model does not automatically produce better social science.
+- Notebook results should be rerun before they are reported.
 
 ## Quick start
 
