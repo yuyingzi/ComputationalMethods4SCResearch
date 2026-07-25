@@ -1,17 +1,40 @@
-# Human Activity Classification with Time Series Data
+# Human Activity Classification from Sensor Time Series
 
-This repository contains work on classifying human activities based on time series data obtained from a Wireless Sensor Network (WSN). The project leverages the AReM dataset, focusing on feature extraction and machine learning techniques for time series classification. 
+## Research question
 
+Can time-domain summary features from a wearable wireless-sensor network
+distinguish human activities, and how sensitive are the results to feature
+selection and time-series segmentation?
 
-## 📘 Project Overview
+## What is implemented
 
-The objective is to classify seven types of human activity based on the AReM dataset. The dataset includes time series data collected from multiple sensors, where each instance represents a human performing an activity.
+- extraction of minimum, maximum, mean, median, standard deviation, and
+  quartile features from six sensor signals;
+- reproducible bootstrap confidence intervals;
+- binary bending/non-bending classification;
+- multiclass activity classification with logistic regression and Naive Bayes;
+- training-only cross-validation for feature and segment-count selection.
 
-### Dataset: AReM
-The AReM dataset, available at [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/label+Recognition+system+based+on+Multisensor+data+fusion+\%28AReM\%29), consists of:
-- **7 Activity Labels**: Each folder represents a distinct activity.
-- **Instances**: Each folder contains multiple files representing individual instances of human activity.
-- **Time Series Variables**: Each file contains six time series measurements (`avg_rss12`, `var_rss12`, `avg_rss13`, `var_rss13`, `vg_rss23`, and `ar_rss23`), each capturing 480 consecutive values.
+The main artifact is [`MainAnalysis.ipynb`](MainAnalysis.ipynb). The dataset is
+bundled under `data/AReM/`.
 
-### Some Reflection...
-While larger datasets can enhance prediction accuracy, this alone may not improve understanding of the complex, underlying social phenomena.
+## Data
+
+The [UCI AReM dataset](https://archive.ics.uci.edu/dataset/366/activity%2Brecognition%2Bsystem%2Bbased%2Bon%2Bmultisensor%2Bdata%2Bfusion)
+contains six temporal sensor variables recorded while an actor performed
+two bending variants, cycling, lying down, sitting, standing, and walking.
+
+Please cite:
+
+> Palumbo, F., Gallicchio, C., Pucci, R., & Micheli, A. (2016). Activity
+> Recognition system based on Multisensor data fusion (AReM). UCI Machine
+> Learning Repository. https://doi.org/10.24432/C5SS33
+
+The UCI distribution is licensed under CC BY 4.0.
+
+## Interpretation boundary
+
+This is a classification exercise, not evidence that the extracted features
+explain human activity. High accuracy shows that the recorded sensor patterns
+separate these activities under this dataset and split; it does not establish
+generalization to new people, devices, or social settings.

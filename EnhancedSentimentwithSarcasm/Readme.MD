@@ -1,40 +1,51 @@
-## 📚 CSCI - Applied Natural Language Processing (A)
+# Sarcasm-Aware Sentiment Classification
 
-## 💡 Some Reflections...
-While machine learning models are powerful tools for text analysis, their interpretability and utility in social science remain areas of challenge. In computational social science, machine learning often serves as a variable extraction tool, how can we use this to enhance research 🤔
+## Research question
 
-## 🎓 Final Group Project: Sarcasm Detection
-For the capstone project, the focus was on sarcasm detection in text, exploring the complexities of language and the challenges of modeling sarcasm:
-- **Dataset and Model**: Applied advanced machine learning techniques, experimenting with embeddings and complex neural network architectures.
-- **Reflections**: This project highlighted the potential of NLP for understanding nuanced language and the limitations of machine learning in interpreting context-heavy expressions.
+Does adding an explicit predicted-irony signal improve binary sentiment
+classification, or does it mainly add another noisy measurement?
 
-## Coursework Overview
-### Homework 1: Sentiment Analysis with Classic Machine Learning Models
-This assignment focused on developing a sentiment analysis classifier using Amazon review data. Key steps included:
-- **Data Preparation**: Processed Amazon reviews by creating binary sentiment labels.
-- **Data Cleaning and Preprocessing**: Applied steps such as text cleaning, stop word removal, and lemmatization.
-- **Feature Extraction**: Extracted TF-IDF features from the reviews.
-- **Model Training**: Trained multiple classifiers (Perceptron, SVM, Logistic Regression, Naive Bayes) and evaluated performance with accuracy, precision, recall, and F1-score metrics.
+## What is implemented
 
-### Homework 2: Word Embeddings and Neural Networks
-Building upon the sentiment analysis task, this assignment introduced Word2Vec embeddings:
-- **Word Embedding Models**: Utilized pre-trained Word2Vec embeddings (Google News) and custom-trained embeddings on the dataset.
-- **Simple Models and Neural Networks**: Applied embeddings in Perceptron, SVM, and feedforward neural networks, comparing performance across different feature types.
-- **Convolutional Neural Networks**: Built a CNN model for sentiment classification, highlighting the effectiveness of deep learning in sentiment analysis tasks.
+| Artifact | Purpose |
+| --- | --- |
+| `LogisticRegPredi.py` | TF-IDF plus logistic-regression sentiment baseline |
+| `Pretrain.py` | BERT sentiment baseline |
+| `EnhancedwithSarcasm_pretrain.py` | Trains an irony detector, prefixes reviews with `[IRONY]` or `[NON_IRONY]`, then trains the sentiment model |
+| `test1.ipynb` | Thin notebook entry point for the maintained enhanced script |
 
-### Homework 3: Part-of-Speech Tagging with Hidden Markov Models
-This assignment introduced sequence tagging using part-of-speech (POS) tagging:
-- **Vocabulary Creation and Model Learning**: Developed vocabulary and trained an HMM model based on emission and transition probabilities.
-- **Decoding Algorithms**: Implemented both Greedy and Viterbi decoding algorithms to predict POS tags and evaluated the model’s accuracy.
+The previous homework catalogue was removed because those implementations are
+not present in this repository.
 
-### Homework 4: Named Entity Recognition with Bidirectional LSTM
-The final assignment focused on named entity recognition (NER) with deep learning methods:
-- **BiLSTM Model**: Implemented a bidirectional LSTM network for NER, achieving baseline performance.
-- **Using Pre-trained GloVe Embeddings**: Enhanced the BiLSTM model by initializing embeddings with GloVe vectors, improving precision, recall, and F1-score.
-- **LSTM-CNN Hybrid**: Incorporated a CNN module to capture character-level information, further boosting model performance.
+## Data
 
+- Sentiment models download the
+  [`stanfordnlp/imdb`](https://huggingface.co/datasets/stanfordnlp/imdb)
+  train/test dataset. Cite Maas et al., *Learning Word Vectors for Sentiment
+  Analysis* (ACL 2011).
+- The irony material is based in part on
+  [SemEval-2018 Task 3](https://aclanthology.org/S18-1005/). Cite Van Hee,
+  Lefever, and Hoste (SemEval 2018).
+- `combined_new_irony.csv` contains additional combined records whose exact
+  provenance and redistribution terms still need to be documented. Treat it as
+  course material only.
 
+## Run
 
-## 👋 Connect
+From this directory:
 
-Thank you for visiting my GitHub! Feel free to explore my repositories, contribute, or reach out if you have insights or feedback. Let's advance the field of AI-mediated communication and computational social science together!
+```bash
+python LogisticRegPredi.py
+python Pretrain.py
+python EnhancedwithSarcasm_pretrain.py
+```
+
+The BERT scripts download pretrained weights and are compute-intensive; a GPU
+is recommended.
+
+## Interpretation boundary
+
+The `[IRONY]` prefix proves that the second model can consume an irony signal.
+It does not prove that irony is measured correctly, nor that any performance
+change generalizes beyond the datasets used here. Compare the enhanced model
+against the BERT baseline before making a substantive claim.

@@ -1,40 +1,76 @@
-# Computational Methods for Social Science Research
+# Computational Methods for Social Science
 
-Coursework and experiments covering time-series classification, sentiment and
-sarcasm classification, and reinforcement learning.
+> A reproducibility-first coursework portfolio exploring how statistical
+> learning, NLP, and deep learning can turn behavioral data into research
+> measurements.
 
-## Setup
+This repository is a collection of independent course projects, not a single
+software package. The projects share one methodological concern: how to build
+useful classifiers without confusing predictive performance with an
+explanation of the underlying social phenomenon.
+
+## Repository positioning
+
+### What this repository is
+
+- A portfolio of applied computational-method projects.
+- A record of work with sensor time series, review sentiment, irony, and neural
+  classifiers.
+- A place to compare modeling choices and document their evaluation limits.
+
+### What this repository is not
+
+- It is not a production library or a unified research framework.
+- It is not a benchmark claiming state-of-the-art results.
+- It is not the replication package for one paper.
+- The reinforcement-learning notebook is external course material, not an
+  original research contribution.
+
+## Portfolio map
+
+| Study | Research question | Methods | Main artifact | Status |
+| --- | --- | --- | --- | --- |
+| Human activity recognition | Can summary features from wearable-sensor time series distinguish activities? | Feature extraction, bootstrap intervals, logistic regression, L1 selection, Naive Bayes | [`AReM-Analysis/MainAnalysis.ipynb`](AReM-Analysis/MainAnalysis.ipynb) | Data bundled; evaluation path validated; rerun for results |
+| Movie-review sentiment | How do dense, convolutional, and recurrent neural models compare on review polarity? | Tokenization, embeddings, MLP, CNN, LSTM | [`final_project/Final_project.ipynb`](final_project/Final_project.ipynb) | Data bundled; split validated; training is compute-intensive |
+| Sarcasm-aware sentiment | Does an explicit predicted-irony signal help sentiment classification? | TF-IDF logistic baseline, BERT, irony-prefix augmentation | [`EnhancedSentimentwithSarcasm/`](EnhancedSentimentwithSarcasm/) | Experimental; downloads IMDb and pretrained models |
+| Reinforcement-learning exercise | How is a PPO agent trained in a Unity ML-Agents environment? | PPO, Unity ML-Agents, Hugging Face Hub | [`RL/notebooks/bonus-unit1/`](RL/notebooks/bonus-unit1/) | External tutorial; Colab-oriented; not part of the research portfolio |
+
+## Research stance
+
+The strongest use of machine learning in computational social science is often
+measurement: extracting a variable, label, or pattern that supports a larger
+substantive argument. Accordingly:
+
+- held-out performance is evidence about generalization, not causal
+  explanation;
+- larger or more complex models are not assumed to produce better social
+  understanding;
+- irony and context-heavy language are treated as measurement challenges, not
+  solved constructs;
+- saved notebook outputs are cleared so results cannot drift away from the
+  current source.
+
+## Quick start
 
 Python 3.10 or 3.11 is recommended.
 
 ```bash
+git clone https://github.com/yuyingzi/CommputationalMethods4SCResearch.git
+cd CommputationalMethods4SCResearch
+
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-```
 
-Large NLP models and the IMDb dataset are downloaded from Hugging Face on first
-use.
-
-## Projects
-
-- `AReM-Analysis/MainAnalysis.ipynb`: activity classification using the bundled
-  AReM sensor data.
-- `final_project/Final_project.ipynb`: sentiment classification using the
-  bundled positive and negative review archives.
-- `EnhancedSentimentwithSarcasm/`: IMDb sentiment baselines and a BERT
-  experiment that injects predicted irony as `[IRONY]` or `[NON_IRONY]` input
-  tokens.
-- `RL/notebooks/bonus-unit1/`: an external Hugging Face Deep RL course notebook.
-
-Start Jupyter from the repository root:
-
-```bash
 python validate_repo.py
 jupyter lab
 ```
 
-Run the standalone NLP baselines from their directory:
+The integrity check is fast and does not train models. The BERT experiments
+download the IMDb dataset and pretrained weights on first use; a GPU is
+recommended.
+
+### Run the NLP scripts
 
 ```bash
 cd EnhancedSentimentwithSarcasm
@@ -43,13 +79,45 @@ python Pretrain.py
 python EnhancedwithSarcasm_pretrain.py
 ```
 
-## Evaluation rules
+## Evaluation contract
 
-- Model and feature selection use training/validation data only.
+- Model and feature selection use training or validation data only.
 - Held-out test data is evaluated once and is never passed to `fit()`.
-- Random splits and bootstrap estimates use fixed seeds.
-- Saved notebook outputs are cleared so displayed results cannot drift from the
-  current source. Re-run a notebook to produce fresh results.
+- Random splits, model initialization, and bootstrap estimates use fixed seeds.
+- Oversampling is applied only to final case-control fitting; it is not allowed
+  to leak duplicated observations across cross-validation folds.
+- Notebook results should be regenerated before they are reported or cited.
 
-The repository does not currently declare a license; the owner should choose
-one before accepting external contributions or redistribution.
+## Data and attribution
+
+| Data or material | Use in this repository | Source and attribution |
+| --- | --- | --- |
+| AReM sensor data | Human activity classification | [UCI AReM dataset](https://archive.ics.uci.edu/dataset/366/activity%2Brecognition%2Bsystem%2Bbased%2Bon%2Bmultisensor%2Bdata%2Bfusion), DOI `10.24432/C5SS33`, licensed CC BY 4.0 |
+| Movie Review Polarity Dataset v2.0 | Bundled positive/negative review archives in `final_project/Data/` | [Cornell Movie Review Data](https://www.cs.cornell.edu/people/pabo/movie-review-data/); cite Pang and Lee (ACL 2004) |
+| Large Movie Review Dataset (IMDb) | Downloaded by the standalone sentiment scripts | [Stanford dataset page](https://ai.stanford.edu/~amaas/data/sentiment/) and [`stanfordnlp/imdb`](https://huggingface.co/datasets/stanfordnlp/imdb); cite Maas et al. (ACL 2011) |
+| SemEval-2018 Task 3 | Irony-detection training material | [Task paper](https://aclanthology.org/S18-1005/); cite Van Hee, Lefever, and Hoste (SemEval 2018) |
+| Huggy / Deep RL course | Reinforcement-learning tutorial notebook | [Hugging Face Deep RL Course](https://huggingface.co/learn/deep-rl-course/en/unitbonus1/how-huggy-works) |
+
+`EnhancedSentimentwithSarcasm/combined_new_irony.csv` also contains additional
+combined records whose exact provenance and redistribution terms are not fully
+documented. Treat it as course material only; do not publish it as a new
+dataset until that provenance is resolved.
+
+## Known limitations
+
+- Full BERT and TensorFlow runs are not part of the fast integrity check.
+- Fresh metrics are intentionally not committed in notebook outputs.
+- The projects do not yet share one experiment-tracking or reporting format.
+- The repository has no top-level license. Dataset licenses do not automatically
+  grant a license for the code; the owner should choose one before inviting
+  reuse or contributions.
+
+## Validation
+
+```bash
+python validate_repo.py
+git diff --check
+```
+
+The first command checks Python syntax, notebook integrity, bundled archive
+counts, and the most important train/test-separation invariants.
