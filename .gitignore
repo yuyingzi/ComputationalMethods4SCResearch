@@ -1,0 +1,9 @@
+.DS_Store
+.ipynb_checkpoints/
+.venv/
+__pycache__/
+*.py[cod]
+
+EnhancedSentimentwithSarcasm/iron_model/
+EnhancedSentimentwithSarcasm/logs/
+EnhancedSentimentwithSarcasm/results/

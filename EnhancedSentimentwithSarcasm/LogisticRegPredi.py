@@ -1,13 +1,13 @@
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.model_selection import train_test_split
+from datasets import load_dataset
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS, TfidfVectorizer
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.linear_model import LogisticRegression
 
-data = pd.read_csv("IMDB Dataset.csv")
+imdb = load_dataset("stanfordnlp/imdb")
+train_texts, train_labels = imdb["train"]["text"], imdb["train"]["label"]
+test_texts, test_labels = imdb["test"]["text"], imdb["test"]["label"]
 
 import re
-from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 def preprocess_text(text):
     # 清除HTML标签和特殊字符
@@ -21,8 +21,7 @@ def preprocess_text(text):
     words = clean_text.split()
     
     # 去除停用词
-    stop_words = set(stopwords.words('english'))
-    words = [word for word in words if word not in stop_words]
+    words = [word for word in words if word not in ENGLISH_STOP_WORDS]
     
     # 对文本进行词干化处理
     stemmer = SnowballStemmer('english')
@@ -33,10 +32,8 @@ def preprocess_text(text):
     
     return clean_text
 
-data['review'] = data['review'].apply(preprocess_text)
-
-# 划分训练集和测试集
-train_texts, test_texts, train_labels, test_labels = train_test_split(data['review'], data['sentiment'], test_size=0.2, random_state=42)
+train_texts = [preprocess_text(text) for text in train_texts]
+test_texts = [preprocess_text(text) for text in test_texts]
 # 创建TF-IDF向量化器
 vectorizer = TfidfVectorizer()
 # 在训练集上进行特征提取
@@ -45,7 +42,7 @@ train_features = vectorizer.fit_transform(train_texts)
 test_features = vectorizer.transform(test_texts)
 
 # 创建朴素贝叶斯分类器
-model = LogisticRegression()
+model = LogisticRegression(max_iter=1000, random_state=42)
 # 在训练集上训练模型
 model.fit(train_features, train_labels)
 

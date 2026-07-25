@@ -1,0 +1,13 @@
+accelerate>=0.28,<2
+datasets>=2.18,<4
+jupyterlab>=4,<5
+matplotlib>=3.8,<4
+nltk>=3.8,<4
+numpy>=1.26,<3
+pandas>=2,<3
+scikit-learn>=1.4,<1.7
+seaborn>=0.13,<1
+statsmodels>=0.14,<1
+tensorflow>=2.16,<3
+torch>=2.2,<3
+transformers>=4.46,<5

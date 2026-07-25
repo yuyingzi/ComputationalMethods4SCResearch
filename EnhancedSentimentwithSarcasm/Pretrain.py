@@ -1,11 +1,11 @@
 import torch
-import csv
-from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments
+from datasets import load_dataset
+from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments, set_seed
 from torch.utils.data import Dataset
-import pandas as pd
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 import numpy as np
+
+set_seed(42)
 
 # Assuming CUDA is available, else fallback to CPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -52,17 +52,20 @@ def compute_metrics(pred):
         'recall': recall,
     }
 
-# Load data
-data = pd.read_csv("IMDB Dataset.csv", on_bad_lines='skip')
-data['label'] = data['sentiment'].map({'positive': 1, 'negative': 0})
-train_texts, test_texts, train_labels, test_labels = train_test_split(data['review'], data['label'], test_size=0.2)
+# Keep model selection on a validation split and reserve the canonical test split.
+imdb = load_dataset("stanfordnlp/imdb")
+split = imdb["train"].train_test_split(test_size=0.1, seed=42)
+train_texts, train_labels = split["train"]["text"], split["train"]["label"]
+eval_texts, eval_labels = split["test"]["text"], split["test"]["label"]
+test_texts, test_labels = imdb["test"]["text"], imdb["test"]["label"]
 
 # Tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 # Dataset
-train_dataset = CustomDataset(train_texts.tolist(), train_labels.tolist(), tokenizer, max_length=256)
-test_dataset = CustomDataset(test_texts.tolist(), test_labels.tolist(), tokenizer, max_length=256)
+train_dataset = CustomDataset(train_texts, train_labels, tokenizer, max_length=256)
+eval_dataset = CustomDataset(eval_texts, eval_labels, tokenizer, max_length=256)
+test_dataset = CustomDataset(test_texts, test_labels, tokenizer, max_length=256)
 
 # Model
 model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2).to(device)
@@ -77,7 +80,7 @@ training_args = TrainingArguments(
     weight_decay=0.01,
     logging_dir='./logs',
     logging_steps=10,
-    evaluation_strategy="steps",
+    eval_strategy="steps",
     eval_steps=500,
     load_best_model_at_end=True,
     # Add the following line to report metrics every evaluation step
@@ -89,7 +92,7 @@ trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=train_dataset,
-    eval_dataset=test_dataset,
+    eval_dataset=eval_dataset,
     compute_metrics=compute_metrics,  # Add this line
 )
 
