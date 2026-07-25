@@ -1,39 +1,41 @@
 # Computational Methods for Social Science
 
-> A reproducibility-first coursework portfolio exploring how statistical
-> learning, NLP, and deep learning can turn behavioral data into research
-> measurements.
+> A reproducibility-first collection of computational methods accumulated
+> across projects for use in social science research.
 
-This repository is a collection of independent course projects, not a single
-software package. The projects share one methodological concern: how to build
-useful classifiers without confusing predictive performance with an
-explanation of the underlying social phenomenon.
+This repository is a growing methods collection rather than a portfolio of
+finished projects. Each project is a worked example through which a method is
+tested, understood, and documented for possible reuse in future social science
+research.
 
 ## Repository positioning
 
 ### What this repository is
 
-- A portfolio of applied computational-method projects.
-- A record of work with sensor time series, review sentiment, irony, and neural
-  classifiers.
-- A place to compare modeling choices and document their evaluation limits.
+- A collection of computational methods learned and refined through individual
+  projects.
+- A set of worked examples covering sensor time series, text classification,
+  irony detection, and neural models.
+- A reference for choosing, adapting, and evaluating methods in later social
+  science research.
 
 ### What this repository is not
 
+- It is not a portfolio intended mainly to showcase completed work.
 - It is not a production library or a unified research framework.
 - It is not a benchmark claiming state-of-the-art results.
 - It is not the replication package for one paper.
 - The reinforcement-learning notebook is external course material, not an
   original research contribution.
 
-## Portfolio map
+## Method index
 
-| Study | Research question | Methods | Main artifact | Status |
+| Worked example | Possible social science use | Reusable methods | Main artifact | Scope |
 | --- | --- | --- | --- | --- |
-| Human activity recognition | Can summary features from wearable-sensor time series distinguish activities? | Feature extraction, bootstrap intervals, logistic regression, L1 selection, Naive Bayes | [`AReM-Analysis/MainAnalysis.ipynb`](AReM-Analysis/MainAnalysis.ipynb) | Data bundled; evaluation path validated; rerun for results |
-| Movie-review sentiment | How do dense, convolutional, and recurrent neural models compare on review polarity? | Tokenization, embeddings, MLP, CNN, LSTM | [`final_project/Final_project.ipynb`](final_project/Final_project.ipynb) | Data bundled; split validated; training is compute-intensive |
-| Sarcasm-aware sentiment | Does an explicit predicted-irony signal help sentiment classification? | TF-IDF logistic baseline, BERT, irony-prefix augmentation | [`EnhancedSentimentwithSarcasm/`](EnhancedSentimentwithSarcasm/) | Experimental; downloads IMDb and pretrained models |
-| Reinforcement-learning exercise | How is a PPO agent trained in a Unity ML-Agents environment? | PPO, Unity ML-Agents, Hugging Face Hub | [`RL/notebooks/bonus-unit1/`](RL/notebooks/bonus-unit1/) | External tutorial; Colab-oriented; not part of the research portfolio |
+| Human activity recognition | Turning repeated sensor measurements into behavioral categories | Time-series feature extraction, bootstrap intervals, logistic regression, L1 selection, Naive Bayes | [`AReM-Analysis/MainAnalysis.ipynb`](AReM-Analysis/MainAnalysis.ipynb) | Data bundled; evaluation path validated; rerun for results |
+| Movie-review sentiment | Measuring evaluative stance in text | Tokenization, embeddings, MLP, CNN, LSTM | [`final_project/Final_project.ipynb`](final_project/Final_project.ipynb) | Data bundled; split validated; training is compute-intensive |
+| Sarcasm-aware sentiment | Testing how contextual language complicates text measurement | TF-IDF logistic baseline, BERT, irony-prefix augmentation | [`EnhancedSentimentwithSarcasm/`](EnhancedSentimentwithSarcasm/) | Experimental; downloads IMDb and pretrained models |
+| Reinforcement-learning exercise | Learning sequential decision methods that may support later research designs | PPO, Unity ML-Agents, Hugging Face Hub | [`RL/notebooks/bonus-unit1/`](RL/notebooks/bonus-unit1/) | External tutorial; Colab-oriented; adjacent learning material |
 
 ## Research stance
 
@@ -55,8 +57,8 @@ substantive argument. Accordingly:
 Python 3.10 or 3.11 is recommended.
 
 ```bash
-git clone https://github.com/yuyingzi/CommputationalMethods4SCResearch.git
-cd CommputationalMethods4SCResearch
+git clone https://github.com/yuyingzi/ComputationalMethods4SCResearch.git
+cd ComputationalMethods4SCResearch
 
 python -m venv .venv
 source .venv/bin/activate
