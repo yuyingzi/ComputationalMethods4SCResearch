@@ -24,12 +24,12 @@ package for one paper.
 | Human activity recognition | Time-series features, bootstrap intervals, logistic regression, L1 selection, Naive Bayes | Turn sensor traces into behavior categories | [`AReM-Analysis/MainAnalysis.ipynb`](AReM-Analysis/MainAnalysis.ipynb) |
 | Movie-review sentiment | Tokenization, embeddings, MLP, CNN, LSTM | Turn text into attitude labels and compare model assumptions | [`final_project/Final_project.ipynb`](final_project/Final_project.ipynb) |
 | Sarcasm-aware sentiment | TF-IDF baseline, BERT, predicted-irony signal | Test how context affects text measurement | [`EnhancedSentimentwithSarcasm/`](EnhancedSentimentwithSarcasm/) |
-| Reinforcement learning | State, action, reward, PPO | Study sequential decisions and behavior simulation | [`RL/notebooks/bonus-unit1/`](RL/notebooks/bonus-unit1/) |
+| Reinforcement learning | State, action, reward, PPO | Study sequential decisions and behavior simulation | [`RL/README.md`](RL/README.md) |
 
 In short: **behavior traces → categories; text → attitudes; context →
 measurement correction; rewards → strategies.**
 
-The reinforcement-learning notebook is external course material and has not
+The reinforcement-learning materials come from an external course and have not
 yet been adapted into a social science research example.
 
 ## Research stance
@@ -51,7 +51,7 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 
-python validate_repo.py
+python scripts/validate_repo.py
 jupyter lab
 ```
 
@@ -85,7 +85,7 @@ python EnhancedwithSarcasm_pretrain.py
 | Movie Review Polarity Dataset v2.0 | Bundled positive/negative review archives in `final_project/Data/` | [Cornell Movie Review Data](https://www.cs.cornell.edu/people/pabo/movie-review-data/); cite Pang and Lee (ACL 2004) |
 | Large Movie Review Dataset (IMDb) | Downloaded by the standalone sentiment scripts | [Stanford dataset page](https://ai.stanford.edu/~amaas/data/sentiment/) and [`stanfordnlp/imdb`](https://huggingface.co/datasets/stanfordnlp/imdb); cite Maas et al. (ACL 2011) |
 | SemEval-2018 Task 3 | Irony-detection training material | [Task paper](https://aclanthology.org/S18-1005/); cite Van Hee, Lefever, and Hoste (SemEval 2018) |
-| Huggy / Deep RL course | Reinforcement-learning tutorial notebook | [Hugging Face Deep RL Course](https://huggingface.co/learn/deep-rl-course/en/unitbonus1/how-huggy-works) |
+| Huggy / Deep RL course | Reinforcement-learning notebooks and exercises | [Hugging Face Deep RL Course](https://huggingface.co/learn/deep-rl-course/en/unitbonus1/how-huggy-works) |
 
 `EnhancedSentimentwithSarcasm/combined_new_irony.csv` also contains additional
 combined records whose exact provenance and redistribution terms are not fully
@@ -104,7 +104,7 @@ dataset until that provenance is resolved.
 ## Validation
 
 ```bash
-python validate_repo.py
+python scripts/validate_repo.py
 git diff --check
 ```
 
