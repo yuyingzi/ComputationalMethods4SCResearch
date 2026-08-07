@@ -6,7 +6,7 @@ from pathlib import Path
 from zipfile import ZipFile
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def notebook_source(path):
