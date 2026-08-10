@@ -170,7 +170,16 @@ def push_to_hub(repo_id, policy, hyperparameters, eval_env, video_fps=30):
 
     with tempfile.TemporaryDirectory() as tmpdirname:
         local_dir = Path(tmpdirname)
-        torch.save(policy, local_dir / "model.pt")
+        torch.save(
+            {
+                "state_dict": policy.state_dict(),
+                "state_space": hyperparameters["state_space"],
+                "action_space": hyperparameters["action_space"],
+                "h_size": hyperparameters["h_size"],
+                "env_id": hyperparameters["env_id"],
+            },
+            local_dir / "model.pt",
+        )
         (local_dir / "hyperparameters.json").write_text(
             json.dumps(hyperparameters, indent=2, default=json_default), encoding="utf-8"
         )

@@ -46,7 +46,7 @@ def record_video(env, Qtable, out_directory, fps=1):
     state, info = env.reset(seed=random.randint(0, 500))
     img = env.render()
     images.append(img)
-    while not terminated or truncated:   # 课程原始写法（Taxi 会正常终止，够用）
+    while not (terminated or truncated):
         action = np.argmax(Qtable[state][:])           # 贪心选动作
         state, reward, terminated, truncated, info = env.step(action)
         img = env.render()
