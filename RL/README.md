@@ -5,7 +5,7 @@ Working code and output-free notebooks from the
 Trained models and large run artifacts are published separately on the
 [Hugging Face Hub](https://huggingface.co/Yoko999).
 
-## Progress: 8 / 11 assignments passed
+## Progress: 9 / 11 — 🎓 certificate of completion earned
 
 The certificate counts 11 hands-on assignments (Units 4, 5 and 8 have two each).
 A submission passes when the pushed model's `mean_reward − std_reward` is at or
@@ -23,7 +23,7 @@ above the minimum. 9/11 earns the certificate of completion.
 | 8 | Unit 8 PII | Sample Factory · VizDoom | — | — | — | 5 | ☐ |
 | 9 | Unit 5 | ML-Agents · SnowballTarget | [`unit5/`](unit5/unit5.ipynb) | [ppo-SnowballTarget](https://huggingface.co/Yoko999/ppo-SnowballTarget) | 23.45 | −100 | ✅ |
 | 10 | Unit 5 | ML-Agents · Pyramids | [`unit5/`](unit5/unit5.ipynb) | [PyramidsRND](https://huggingface.co/Yoko999/PyramidsRND) | 1.64 | −100 | ✅ |
-| 11 | Unit 7 | ML-Agents · SoccerTwos | — | — | — | −100 | ☐ |
+| 11 | Unit 7 | ML-Agents (MA-POCA) · SoccerTwos | [`unit7/`](unit7/) | [poca-SoccerTwos](https://huggingface.co/Yoko999/poca-SoccerTwos) | ELO 1205 | −100 | ✅ |
 
 Extra (beyond the certificate): [a2c-PandaPickAndPlace-v3](https://huggingface.co/Yoko999/a2c-PandaPickAndPlace-v3).
 
@@ -34,7 +34,9 @@ Extra (beyond the certificate): [a2c-PandaPickAndPlace-v3](https://huggingface.c
   `gym==0.22`, which no longer builds on modern Python). Its clipped-surrogate
   objective is worked through separately in
   [`unit8/ppo_core_exercise.py`](unit8/ppo_core_exercise.py).
-- Units 1, 2, 4, 6 and 8-PI run locally (CPU/MPS). Unit 3 (Atari) and Units 5 / 7
-  (Unity ML-Agents) run on Colab — the Unity environment binaries are Linux/x86.
-- Remaining for the certificate: any one of Unit 7 (SoccerTwos), Unit 8-PII, or
-  Unit 4 (Pixelcopter) → 9/11.
+- Units 1, 2, 4, 6, 8-PI and 7 run locally on Apple Silicon. Unit 7's SoccerTwos
+  build is a universal (x86_64 + arm64) binary, so it trains natively — see
+  [`unit7/`](unit7/) for the local ML-Agents setup. Unit 3 (Atari) and Unit 5
+  (SnowballTarget / Pyramids) run on Colab — those Unity binaries are Linux/x86 only.
+- Certificate of completion earned at 9/11. For 100% (excellence): Unit 4
+  Pixelcopter and Unit 8-PII (VizDoom) remain.
