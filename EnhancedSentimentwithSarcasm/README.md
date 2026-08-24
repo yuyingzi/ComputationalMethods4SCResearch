@@ -37,7 +37,6 @@ difference is the irony prefix.
 | `test1.ipynb` | Notebook entry point — just `%run`s the enhanced script |
 | `combined_new_irony.csv` | Irony training data (`tweet`, `sarcastic`), ~5.3k rows — **this is what the code loads** |
 | `SemEval2018-T3-train-taskA.txt` | Raw source irony data (SemEval-2018 Task 3); reference only, not read by any script |
-| `SemEval2018-T3-train-taskA_expend.txt` | ⚠️ byte-identical copy of the file above (safe to delete) |
 
 ## Data
 
