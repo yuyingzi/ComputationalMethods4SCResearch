@@ -44,3 +44,8 @@ Extra (beyond the certificate): [a2c-PandaPickAndPlace-v3](https://huggingface.c
 - **`unit8/`** — see [`unit8/README.md`](unit8/README.md) for both Unit 8 Part I
   (PPO from scratch, gymnasium) and Part II (VizDoom / Sample Factory, local on arm64).
 - 🏆 All 11 assignments passed → **certificate of excellence**.
+
+## What next
+
+A post-course study path (theory → from-scratch depth → RL×LLM frontier) with
+vetted resources: [`LEARNING_PATH.md`](LEARNING_PATH.md).
